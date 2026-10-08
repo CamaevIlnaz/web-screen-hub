@@ -1,4 +1,3 @@
-export { JsonEditor, JsonValidationStatus } from './json-editor';
 export { Title } from './title';
 export type { TitleSize } from './title';
 

@@ -1,12 +1,6 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Separator,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useUnit } from 'effector-react';
-import { Lock, Mail } from 'lucide-react';
+import { Lock, User } from 'lucide-react';
 
 import { sessionModel } from '@/entities/session';
 import { FormInput, FormProvider, useAppForm } from '@/shared/form';
@@ -22,7 +16,7 @@ export function LoginForm() {
   const [isSubmitting, submitError, submitForm] = useUnit([
     sessionModel.$isSubmitting,
     sessionModel.$submitError,
-    sessionModel.loginFormSubmitted
+    sessionModel.loginFormSubmitted,
   ]);
 
   const form = useAppForm({
@@ -41,8 +35,8 @@ export function LoginForm() {
           <FormInput
             name="login"
             label="Логин"
-            placeholder="name@example.com"
-            startElement={<Mail size={18} strokeWidth={1.75} />}
+            placeholder="Введите логин"
+            startElement={<User size={18} strokeWidth={1.75} />}
           />
           <FormInput
             name="password"

@@ -25,7 +25,7 @@ export function AuthLogo() {
         />
       </svg>
       <Text fontSize="lg" fontWeight="bold" color="heading" letterSpacing="-0.02em">
-        Mock Hub
+        Screen Hub
       </Text>
     </Flex>
   );

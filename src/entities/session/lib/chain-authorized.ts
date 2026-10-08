@@ -26,7 +26,6 @@ export function chainAuthorized<Params extends RouteParams>(
       alreadyAuthorized,
       sessionModel.meFx.done,
       sessionModel.loginFx.done,
-      sessionModel.registerFx.done,
     ],
     cancelOn: [sessionModel.meFx.fail, sessionModel.logoutFx.done],
   });

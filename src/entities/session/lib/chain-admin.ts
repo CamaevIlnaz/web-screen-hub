@@ -24,11 +24,7 @@ export function chainAdmin<Params extends RouteParams>(
   });
 
   const becameAdmin = sample({
-    clock: [
-      sessionModel.meFx.done,
-      sessionModel.loginFx.done,
-      sessionModel.registerFx.done,
-    ],
+    clock: [sessionModel.meFx.done, sessionModel.loginFx.done],
     source: sessionModel.$user,
     filter: (user) => user?.role === 'admin',
   });
@@ -44,11 +40,7 @@ export function chainAdmin<Params extends RouteParams>(
   });
 
   const becameNonAdmin = sample({
-    clock: [
-      sessionModel.meFx.done,
-      sessionModel.loginFx.done,
-      sessionModel.registerFx.done,
-    ],
+    clock: [sessionModel.meFx.done, sessionModel.loginFx.done],
     source: sessionModel.$user,
     filter: (user) => Boolean(user) && user?.role !== 'admin',
   });

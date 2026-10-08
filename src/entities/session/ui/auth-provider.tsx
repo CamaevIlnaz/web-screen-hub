@@ -7,20 +7,15 @@ import { sessionModel } from '../model';
 interface AuthProviderProps {
   children: ReactNode;
   loginPage: ReactNode;
-  registerPage: ReactNode;
   pendingFallback?: ReactNode;
 }
 
 export function AuthProvider({
   children,
   loginPage,
-  registerPage,
   pendingFallback,
 }: AuthProviderProps) {
-  const [authStatus, authView] = useUnit([
-    sessionModel.$authStatus,
-    sessionModel.$authView,
-  ]);
+  const authStatus = useUnit(sessionModel.$authStatus);
 
   if (authStatus === 'pending') {
     return (
@@ -39,7 +34,7 @@ export function AuthProvider({
   }
 
   if (authStatus === 'anonymous') {
-    return authView === 'register' ? registerPage : loginPage;
+    return loginPage;
   }
 
   return children;

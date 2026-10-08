@@ -1,24 +1,12 @@
-import {
-  changePasswordFx,
-  loginFx,
-  logoutFx,
-  meFx,
-  registerFx,
-  updateProfileFx,
-  uploadAvatarFx,
-} from './effects';
+import { loginFx, logoutFx, meFx } from './effects';
 import {
   $authStatus,
-  $authView,
   $isAdmin,
   $isSubmitting,
   $submitError,
   $user,
   loginFormSubmitted,
-  loginViewOpened,
   logoutRequested,
-  registerFormSubmitted,
-  registerViewOpened,
   sessionRequested,
 } from './stores';
 
@@ -26,30 +14,14 @@ export const sessionModel = {
   $user,
   $isAdmin,
   $authStatus,
-  $authView,
   $isSubmitting,
   $submitError,
   sessionRequested,
   loginFormSubmitted,
-  registerFormSubmitted,
   logoutRequested,
-  loginViewOpened,
-  registerViewOpened,
   meFx,
   loginFx,
-  registerFx,
   logoutFx,
-  updateProfileFx,
-  changePasswordFx,
-  uploadAvatarFx,
 };
 
-export type {
-  AuthStatus,
-  AuthUserResponseDto,
-  AuthView,
-  ChangePasswordDto,
-  LoginDto,
-  RegisterPayload,
-  UpdateProfileDto,
-} from './types';
+export type { AuthStatus, LoginDto, UserResponseDto } from './types';

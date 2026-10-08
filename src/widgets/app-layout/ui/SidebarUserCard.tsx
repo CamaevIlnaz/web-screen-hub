@@ -39,7 +39,7 @@ export function SidebarUserCard() {
               lineHeight="1.25"
               truncate
             >
-              {user?.firstName}
+              {user?.name}
             </Text>
             <Text fontSize="xs" color="muted" lineHeight="1.25">
               Личный кабинет
