@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'atomic-router-react';
 
-import { type NavItem } from '../model/nav-items';
+import { type NavItem } from './nav-items';
 
 interface SidebarNavItemProps {
   item: NavItem;
@@ -20,32 +20,28 @@ export function SidebarNavItem({ item }: SidebarNavItemProps) {
           px: '3',
           py: '2.5',
           borderRadius: 'md',
-          color: 'text',
+          color: 'muted',
           textDecoration: 'none',
           transition: 'background 0.15s ease, color 0.15s ease',
           '&:hover:not(.active)': {
             bg: 'panelAlt',
+            color: 'text',
           },
           '&.active': {
             bg: 'navActive',
             color: 'brand',
-            '& svg': {
-              color: 'brand',
-            },
+            fontWeight: '600',
           },
           '& svg': {
-            color: 'muted',
+            color: 'currentColor',
             flexShrink: 0,
           },
-        },
-        '& > a.active svg': {
-          color: 'brand',
         },
       }}
     >
       <Link to={item.route} activeClassName="active">
         <Flex align="center" gap="3">
-          <Icon size={22} strokeWidth={1.75} />
+          <Icon size={20} strokeWidth={1.75} />
           <Text fontSize="sm" fontWeight="medium" lineHeight="1.25">
             {item.label}
           </Text>

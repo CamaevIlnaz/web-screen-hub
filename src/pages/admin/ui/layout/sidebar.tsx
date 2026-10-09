@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react';
 
-import { SidebarFooter } from './SidebarFooter';
-import { SidebarHeader } from './SidebarHeader';
-import { SidebarNav } from './SidebarNav';
+import { SidebarFooter } from './sidebar-footer';
+import { SidebarHeader } from './sidebar-header';
+import { SidebarNav } from './sidebar-nav';
 
 export function Sidebar() {
   return (
@@ -12,7 +12,7 @@ export function Sidebar() {
       w="260px"
       flexShrink={0}
       h="100vh"
-      bg="panel"
+      bg="page"
       borderRight="1px solid"
       borderColor="border"
       py="6"

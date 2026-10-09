@@ -9,10 +9,11 @@ interface UserAvatarProps {
 
 export function UserAvatar({ user, size }: UserAvatarProps) {
   const name = user?.name ?? '';
+  const initial = name.charAt(0).toUpperCase();
 
   return (
-    <Avatar.Root size={size} bg="muted" color="primaryText" flexShrink={0}>
-      <Avatar.Fallback name={name}>{name.charAt(0).toUpperCase()}</Avatar.Fallback>
+    <Avatar.Root size={size} bg="avatar" color="primaryText" flexShrink={0}>
+      <Avatar.Fallback name={name}>{initial}</Avatar.Fallback>
     </Avatar.Root>
   );
 }

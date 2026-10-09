@@ -1,8 +1,8 @@
 import { createRoutesView } from 'atomic-router-react';
 
-import { NotFoundPage, routes } from '@/pages';
+import { NotFoundPage, viewRoutes } from '@/pages';
 
 export const RoutesView = createRoutesView({
-  routes: routes.map(({ route, view }) => ({ route, view })),
+  routes: viewRoutes,
   otherwise: NotFoundPage,
 });

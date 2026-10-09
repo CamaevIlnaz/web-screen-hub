@@ -1,7 +1,17 @@
-import { notFoundRoute } from '@/pages';
-import { projectsRoute } from '@/pages/projects';
+import {
+  adminNodesRoute,
+  adminProjectsRoute,
+  adminRoute,
+  adminSectionsRoute,
+  adminSettingsRoute,
+} from '@/pages/admin';
+import { notFoundRoute } from '@/pages/not-found';
 
 export const routes = {
-  projects: projectsRoute,
+  admin: adminRoute,
+  adminProjects: adminProjectsRoute,
+  adminSections: adminSectionsRoute,
+  adminNodes: adminNodesRoute,
+  adminSettings: adminSettingsRoute,
   notFound: notFoundRoute,
 };

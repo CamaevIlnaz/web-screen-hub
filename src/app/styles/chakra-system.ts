@@ -9,6 +9,7 @@ const config = defineConfig({
         accent: { value: theme.colors.accent },
         brand: { value: theme.colors.brand },
         brandSoft: { value: theme.colors.brandSoft },
+        avatar: { value: theme.colors.avatar },
         danger: { value: theme.colors.danger },
         dangerBg: { value: theme.colors.dangerBg },
         heading: { value: theme.colors.heading },
