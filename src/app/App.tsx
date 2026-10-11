@@ -11,11 +11,11 @@ import { system } from './styles/chakra-system';
 export function App() {
   return (
     <ChakraProvider value={system}>
-      <AuthProvider loginPage={<LoginPage />}>
-        <RouterProvider router={router}>
+      <RouterProvider router={router}>
+        <AuthProvider loginPage={<LoginPage />}>
           <RoutesView />
-        </RouterProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </RouterProvider>
       <Toaster />
     </ChakraProvider>
   );

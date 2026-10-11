@@ -24,9 +24,8 @@ export function chainAdmin<Params extends RouteParams>(
   });
 
   const becameAdmin = sample({
-    clock: [sessionModel.meFx.done, sessionModel.loginFx.done],
-    source: sessionModel.$user,
-    filter: (user) => user?.role === 'admin',
+    clock: [sessionModel.meFx.doneData, sessionModel.loginFx.doneData],
+    filter: (user) => user.role === 'admin',
   });
 
   const accessDenied = sample({
@@ -40,20 +39,36 @@ export function chainAdmin<Params extends RouteParams>(
   });
 
   const becameNonAdmin = sample({
-    clock: [sessionModel.meFx.done, sessionModel.loginFx.done],
-    source: sessionModel.$user,
-    filter: (user) => Boolean(user) && user?.role !== 'admin',
+    clock: [sessionModel.meFx.doneData, sessionModel.loginFx.doneData],
+    filter: (user) => user.role !== 'admin',
   });
 
-  return chainRoute({
+  const chainedRoute = chainRoute({
     route,
     beforeOpen: sessionCheckStarted,
     openOn: [alreadyAdmin, becameAdmin],
     cancelOn: [
       accessDenied,
       becameNonAdmin,
-      sessionModel.meFx.fail,
       sessionModel.logoutFx.done,
     ],
   });
+
+  // chainRoute внутри использует захардкоженные SID сторов; при 4+ вызовах
+  // openOn + $hasSameParams перестаёт открывать chained-роут после логина.
+  sample({
+    clock: becameAdmin,
+    source: {
+      isParentOpened: route.$isOpened,
+      isChainedOpened: chainedRoute.$isOpened,
+      params: route.$params,
+      query: route.$query,
+    },
+    filter: ({ isParentOpened, isChainedOpened }) =>
+      isParentOpened && !isChainedOpened,
+    fn: ({ params, query }) => ({ params, query }),
+    target: chainedRoute.opened,
+  });
+
+  return chainedRoute;
 }

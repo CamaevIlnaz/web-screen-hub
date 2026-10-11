@@ -8,13 +8,12 @@ export const adminSectionsRoute = createRoute();
 export const adminNodesRoute = createRoute();
 export const adminSettingsRoute = createRoute();
 
-export const adminRouteAdmin = chainAdmin(adminRoute);
 export const adminProjectsRouteAdmin = chainAdmin(adminProjectsRoute);
 export const adminSectionsRouteAdmin = chainAdmin(adminSectionsRoute);
 export const adminNodesRouteAdmin = chainAdmin(adminNodesRoute);
 export const adminSettingsRouteAdmin = chainAdmin(adminSettingsRoute);
 
 redirect({
-  clock: adminRouteAdmin.opened,
+  clock: adminRoute.opened,
   route: adminProjectsRoute,
 });

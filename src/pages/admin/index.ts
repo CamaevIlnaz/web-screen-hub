@@ -1,6 +1,5 @@
 export {
   adminRoute,
-  adminRouteAdmin,
   adminProjectsRoute,
   adminProjectsRouteAdmin,
   adminSectionsRoute,
