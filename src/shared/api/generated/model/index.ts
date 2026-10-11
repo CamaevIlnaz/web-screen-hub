@@ -6,7 +6,34 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './createFrameDto';
+export * from './createGroupDto';
+export * from './createProjectDto';
+export * from './createSectionDto';
+export * from './createVersionDto';
 export * from './errorResponseDto';
+export * from './frameResponseDto';
+export * from './frameResponseDtoDescription';
+export * from './frameResponseDtoFigmaId';
+export * from './groupResponseDto';
+export * from './groupResponseDtoDescription';
+export * from './groupResponseDtoFigmaId';
 export * from './loginDto';
+export * from './projectResponseDto';
+export * from './projectResponseDtoDescription';
+export * from './projectResponseDtoFigmaId';
+export * from './projectResponseDtoPreview';
+export * from './projectsControllerFindAllParams';
+export * from './projectSectionsControllerFindAllParams';
+export * from './sectionResponseDto';
+export * from './sectionResponseDtoDescription';
+export * from './sectionResponseDtoFigmaId';
+export * from './updateFrameDto';
+export * from './updateGroupDto';
+export * from './updateProjectDto';
+export * from './updateSectionDto';
+export * from './updateVersionDto';
 export * from './userResponseDto';
 export * from './userResponseDtoRole';
+export * from './versionResponseDto';
+export * from './versionResponseDtoDescription';
