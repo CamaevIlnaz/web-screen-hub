@@ -1,18 +1,12 @@
 import {
   type LucideIcon,
   ChartColumn,
-  FileText,
   Settings,
-  SquareStack,
 } from 'lucide-react';
 import { type RouteInstance, type RouteParams } from 'atomic-router';
 
-import {
-  adminNodesRoute,
-  adminProjectsRoute,
-  adminSectionsRoute,
-  adminSettingsRoute,
-} from '../../model';
+import { adminProjectsRoute } from "../../projects/model"
+import { adminSettingsRoute } from "../../settings/model"
 
 export interface NavItem {
   route: RouteInstance<RouteParams>;
@@ -22,16 +16,5 @@ export interface NavItem {
 
 export const navItems: NavItem[] = [
   { route: adminProjectsRoute, label: 'Проекты', icon: ChartColumn },
-  { route: adminSectionsRoute, label: 'Страницы', icon: FileText },
-  {
-    route: adminNodesRoute,
-    label: 'Ноды внутри групп',
-    icon: SquareStack,
-  },
+  { route: adminSettingsRoute, label: 'Настройки', icon: Settings },
 ];
-
-export const settingsNavItem: NavItem = {
-  route: adminSettingsRoute,
-  label: 'Настройки',
-  icon: Settings,
-};

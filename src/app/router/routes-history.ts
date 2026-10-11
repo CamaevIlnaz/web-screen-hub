@@ -1,10 +1,10 @@
 import { createHistoryRouter } from 'atomic-router';
 import { createBrowserHistory } from 'history';
 
-import { historyRoutes, notFoundRoute } from '@/pages';
+import { notFoundRoute, routes } from '@/pages';
 
 export const router = createHistoryRouter({
-  routes: historyRoutes,
+  routes: routes.map(({ path, route }) => ({ path, route })),
   notFoundRoute,
 });
 
