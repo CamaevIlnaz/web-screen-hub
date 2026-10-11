@@ -22,6 +22,7 @@ export const theme = {
   radius: {
     md: '8px',
     lg: '18px',
+    xl: '12px',
   },
   shadow: {
     panel: '0 18px 40px rgba(24, 33, 47, 0.08)',

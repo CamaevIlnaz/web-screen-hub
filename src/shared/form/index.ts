@@ -19,4 +19,7 @@ export type { FormTextareaProps } from './ui/form-textarea';
 export { FormToggle } from './ui/form-toggle';
 export type { FormToggleProps } from './ui/form-toggle';
 
+export { FormFileUpload } from './ui/form-file-upload';
+export type { FormFileUploadProps } from './ui/form-file-upload';
+
 export { FormProvider } from 'react-hook-form';

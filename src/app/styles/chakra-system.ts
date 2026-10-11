@@ -28,6 +28,7 @@ const config = defineConfig({
       radii: {
         md: { value: theme.radius.md },
         lg: { value: theme.radius.lg },
+        xl: { value: theme.radius.xl },
       },
       fonts: {
         body: { value: 'Manrope, system-ui, sans-serif' },
