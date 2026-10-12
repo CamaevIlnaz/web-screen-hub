@@ -18,9 +18,9 @@ export function DeleteProjectButton({ project }: DeleteProjectButtonProps) {
       aria-label={`Удалить ${project.name}`}
       variant="outline"
       borderRadius="md"
-      borderColor="danger"
-      color="danger"
-      bg="dangerBg"
+      borderColor="border"
+      color="text"
+      bg="panel"
       h="12"
       w="12"
       minW="12"

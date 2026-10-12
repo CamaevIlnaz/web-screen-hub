@@ -1,5 +1,5 @@
 import { createRoute } from 'atomic-router';
-import { combine, createEffect, createEvent, createStore, sample } from 'effector';
+import { createEffect, createEvent, sample } from 'effector';
 
 import { projectModel } from '@/entities/project';
 import { chainAdmin } from '@/entities/session';
@@ -11,29 +11,8 @@ import { notifyErrorFx } from '@/shared/ui';
 export const adminProjectsRoute = createRoute();
 export const chainAdminProjectsRoute = chainAdmin(adminProjectsRoute);
 
-export type SortDirection = 'asc' | 'desc';
-
 export const searchInputChanged = createEvent<string>();
 export const refreshClicked = createEvent();
-export const sortToggled = createEvent();
-
-export const $sortDirection = createStore<SortDirection>('desc').on(
-  sortToggled,
-  (direction) => (direction === 'desc' ? 'asc' : 'desc'),
-);
-
-export const $sortedProjects = combine(
-  projectModel.$projects,
-  $sortDirection,
-  (projects, direction) =>
-    [...projects].sort((left, right) => {
-      const diff =
-        new Date(left.lastModified).getTime() -
-        new Date(right.lastModified).getTime();
-
-      return direction === 'asc' ? diff : -diff;
-    }),
-);
 
 const debounceSearchFx = createEffect(async (value: string) => {
   await new Promise((resolve) => {

@@ -9,7 +9,7 @@ import {
   Table,
   Text,
 } from '@chakra-ui/react';
-import { ArrowDownUp, RefreshCw, Search } from 'lucide-react';
+import { RefreshCw, Search } from 'lucide-react';
 
 import {
   asNullableString,
@@ -20,26 +20,35 @@ import { DeleteProjectButton } from '@/features/delete-project';
 import { EditProjectButton } from '@/features/edit-project';
 
 import { formatProjectDate, formatProjectsCount } from '../lib';
-import type { SortDirection } from '../model';
+
+interface ProjectsTableColumn {
+  id: string;
+  label: string;
+  w?: string;
+  textAlign?: 'left' | 'center' | 'right';
+}
+
+const PROJECTS_TABLE_COLUMNS: ProjectsTableColumn[] = [
+  { id: 'name', label: 'Название' },
+  { id: 'figmaId', label: 'Figma ID', w: '160px' },
+  { id: 'lastModified', label: 'Последнее обновление', w: '220px' },
+  { id: 'actions', label: 'Действия', w: '140px', textAlign: 'right' },
+];
 
 interface ProjectsTableProps {
   projects: ProjectResponseDto[];
   search: string;
   isLoading: boolean;
-  sortDirection: SortDirection;
   onSearchChange: (value: string) => void;
   onRefresh: () => void;
-  onSortToggle: () => void;
 }
 
 export function ProjectsTable({
   projects,
   search,
   isLoading,
-  sortDirection,
   onSearchChange,
   onRefresh,
-  onSortToggle,
 }: ProjectsTableProps) {
   return (
     <Box
@@ -92,80 +101,37 @@ export function ProjectsTable({
       </Flex>
 
       <Box overflowX="auto" px="5">
-        <Table.Root size="md" variant="line" borderWidth="1px" borderRadius="md" borderCollapse="separate" borderColor="border">
+        <Table.Root size="md" variant="line" borderWidth="1px" borderColor="border">
           <Table.Header>
             <Table.Row bg="panelAlt">
-              <Table.ColumnHeader
-                color="muted"
-                fontSize="xs"
-                fontWeight="semibold"
-                textTransform="none"
-                letterSpacing="normal"
-                px="5"
-                py="3.5"
-                borderColor="border"
-              >
-                Название
-              </Table.ColumnHeader>
-              <Table.ColumnHeader
-                color="muted"
-                fontSize="xs"
-                fontWeight="semibold"
-                textTransform="none"
-                letterSpacing="normal"
-                px="5"
-                py="3.5"
-                w="160px"
-                borderColor="border"
-              >
-                Figma ID
-              </Table.ColumnHeader>
-              <Table.ColumnHeader
-                color="muted"
-                fontSize="xs"
-                fontWeight="semibold"
-                textTransform="none"
-                letterSpacing="normal"
-                px="5"
-                py="3.5"
-                w="220px"
-                borderColor="border"
-              >
-                <Flex
-                  as="button"
-                  type="button"
-                  align="center"
-                  gap="1.5"
-                  cursor="pointer"
-                  onClick={onSortToggle}
-                  aria-label={`Сортировать по дате (${sortDirection === 'desc' ? 'сначала новые' : 'сначала старые'})`}
+              {PROJECTS_TABLE_COLUMNS.map((column) => (
+                <Table.ColumnHeader
+                  key={column.id}
+                  color="blackAlpha.800"
+                  fontSize="xs"
+                  fontWeight="bold"
+                  textTransform="none"
+                  letterSpacing="normal"
+                  px="5"
+                  py="3.5"
+                  borderColor="border"
+                  w={column.w}
+                  textAlign={column.textAlign}
                 >
-                  Последнее обновление
-                  <Box color="muted" display="inline-flex">
-                    <ArrowDownUp size={14} strokeWidth={1.75} />
-                  </Box>
-                </Flex>
-              </Table.ColumnHeader>
-              <Table.ColumnHeader
-                color="muted"
-                fontSize="xs"
-                fontWeight="semibold"
-                textTransform="none"
-                letterSpacing="normal"
-                px="5"
-                py="3.5"
-                w="140px"
-                textAlign="right"
-                borderColor="border"
-              >
-                Действия
-              </Table.ColumnHeader>
+                  {column.label}
+                </Table.ColumnHeader>
+              ))}
             </Table.Row>
           </Table.Header>
           <Table.Body>
             {isLoading && projects.length === 0 ? (
               <Table.Row>
-                <Table.Cell colSpan={4} py="16" textAlign="center" borderColor="border">
+                <Table.Cell
+                  colSpan={PROJECTS_TABLE_COLUMNS.length}
+                  py="16"
+                  textAlign="center"
+                  borderColor="border"
+                >
                   <Spinner size="md" color="primary" />
                 </Table.Cell>
               </Table.Row>
@@ -173,7 +139,12 @@ export function ProjectsTable({
 
             {!isLoading && projects.length === 0 ? (
               <Table.Row>
-                <Table.Cell colSpan={4} py="16" textAlign="center" borderColor="border">
+                <Table.Cell
+                  colSpan={PROJECTS_TABLE_COLUMNS.length}
+                  py="16"
+                  textAlign="center"
+                  borderColor="border"
+                >
                   <Text fontSize="sm" color="muted">
                     Проекты не найдены
                   </Text>
@@ -188,7 +159,7 @@ export function ProjectsTable({
 
               return (
                 <Table.Row key={project.id} bg="panel">
-                  <Table.Cell px="5" py="4" borderColor="border" h="20">
+                  <Table.Cell px="5" py="4" h="20">
                     <Flex align="center" gap="4" minW="0">
                       <Box
                         w="76px"
@@ -234,12 +205,12 @@ export function ProjectsTable({
                       </Box>
                     </Flex>
                   </Table.Cell>
-                  <Table.Cell px="5" py="4" borderColor="border">
+                  <Table.Cell px="5" py="4">
                     <Text fontSize="sm" color="text" lineHeight="1.3">
                       {figmaId ?? '—'}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell px="5" py="4" borderColor="border">
+                  <Table.Cell px="5" py="4">
                     <Text
                       fontSize="sm"
                       fontWeight="medium"
@@ -249,7 +220,7 @@ export function ProjectsTable({
                       {formatProjectDate(project.lastModified)}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell px="5" py="4" borderColor="border">
+                  <Table.Cell px="5" py="4">
                     <Flex justify="flex-end" align="center" gap="3.5">
                       <EditProjectButton project={project} />
                       <DeleteProjectButton project={project} />
@@ -262,7 +233,7 @@ export function ProjectsTable({
         </Table.Root>
       </Box>
 
-      <Box px="5" py="4" borderTopWidth="1px" borderColor="border">
+      <Box px="5" py="4">
         <Text fontSize="xs" color="muted">
           {formatProjectsCount(projects.length)}
         </Text>

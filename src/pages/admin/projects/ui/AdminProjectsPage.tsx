@@ -7,26 +7,17 @@ import { DeleteProjectDialog } from '@/features/delete-project';
 import { EditProjectDialog } from '@/features/edit-project';
 import { Title } from '@/shared/ui';
 
-import {
-  $sortDirection,
-  $sortedProjects,
-  refreshClicked,
-  searchInputChanged,
-  sortToggled,
-} from '../model';
+import { refreshClicked, searchInputChanged } from '../model';
 import { ProjectsTable } from './projects-table';
 
 export const AdminProjectsPage = () => {
-  const [projects, search, isLoading, sortDirection, onSearchChange, onRefresh, onSortToggle] =
-    useUnit([
-      $sortedProjects,
-      projectModel.$search,
-      projectModel.$isLoading,
-      $sortDirection,
-      searchInputChanged,
-      refreshClicked,
-      sortToggled,
-    ]);
+  const [projects, search, isLoading, onSearchChange, onRefresh] = useUnit([
+    projectModel.$projects,
+    projectModel.$search,
+    projectModel.$isLoading,
+    searchInputChanged,
+    refreshClicked,
+  ]);
 
   return (
     <Box px="8" py="8">
@@ -51,10 +42,8 @@ export const AdminProjectsPage = () => {
         projects={projects}
         search={search}
         isLoading={isLoading}
-        sortDirection={sortDirection}
         onSearchChange={onSearchChange}
         onRefresh={onRefresh}
-        onSortToggle={onSortToggle}
       />
 
       <CreateProjectDialog />
