@@ -47,7 +47,6 @@ export function ProjectsTable({
       borderRadius="xl"
       borderWidth="1px"
       borderColor="border"
-      boxShadow="sm"
       overflow="hidden"
     >
       <Flex align="center" justify="space-between" gap="4" px="5" py="5">
@@ -92,8 +91,8 @@ export function ProjectsTable({
         </IconButton>
       </Flex>
 
-      <Box overflowX="auto">
-        <Table.Root size="md" variant="line">
+      <Box overflowX="auto" px="5">
+        <Table.Root size="md" variant="line" borderWidth="1px" borderRadius="md" borderCollapse="separate" borderColor="border">
           <Table.Header>
             <Table.Row bg="panelAlt">
               <Table.ColumnHeader

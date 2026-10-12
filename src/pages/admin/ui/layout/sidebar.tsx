@@ -12,7 +12,6 @@ export function Sidebar() {
       w="260px"
       flexShrink={0}
       h="100vh"
-      bg="page"
       borderRight="1px solid"
       borderColor="border"
       py="6"

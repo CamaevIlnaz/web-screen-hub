@@ -42,7 +42,7 @@ export function SidebarNavItem({ item }: SidebarNavItemProps) {
       <Link to={item.route} activeClassName="active">
         <Flex align="center" gap="3">
           <Icon size={20} strokeWidth={1.75} />
-          <Text fontSize="sm" fontWeight="medium" lineHeight="1.25">
+          <Text fontSize="sm" fontWeight="semibold" lineHeight="1.25">
             {item.label}
           </Text>
         </Flex>

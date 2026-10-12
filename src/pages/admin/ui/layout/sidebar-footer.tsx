@@ -27,7 +27,7 @@ export function SidebarFooter() {
           {name.charAt(0).toUpperCase()}
         </Avatar.Fallback>
       </Avatar.Root>
-      <Text fontSize="sm" color="text" flex="1" minW="0" truncate title={name}>
+      <Text fontSize="sm" fontWeight="semibold" color="text" flex="1" minW="0" truncate title={name}>
         {name}
       </Text>
       <Button
@@ -37,7 +37,7 @@ export function SidebarFooter() {
         minW="0"
         px="0"
         fontSize="sm"
-        fontWeight="normal"
+        fontWeight="semibold"
         color="brand"
         flexShrink={0}
         disabled={isLoggingOut}

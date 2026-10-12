@@ -11,8 +11,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   return (
     <Flex h="100vh" bg="page" fontFamily="body" overflow="hidden">
       <Sidebar />
-      <Flex direction="column" flex="1" minW="0" bg="panel">
-        <Box as="main" flex="1" minH="0" overflowY="auto" bg="panel">
+      <Flex direction="column" flex="1" minW="0">
+        <Box as="main" flex="1" minH="0" overflowY="auto">
           {children}
         </Box>
       </Flex>
