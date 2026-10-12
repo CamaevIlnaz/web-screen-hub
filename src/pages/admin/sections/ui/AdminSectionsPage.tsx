@@ -3,6 +3,9 @@ import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
 
 import { sectionModel } from '@/entities/section';
+import { CreateSectionButton, CreateSectionDialog } from '@/features/create-section';
+import { DeleteSectionDialog } from '@/features/delete-section';
+import { EditSectionDialog } from '@/features/edit-section';
 import { Title } from '@/shared/ui';
 
 import { adminProjectsRoute } from '../../projects';
@@ -51,6 +54,8 @@ export const AdminSectionsPage = () => {
             Список разделов выбранного проекта.
           </Text>
         </Box>
+
+        {project ? <CreateSectionButton projectId={project.id} /> : null}
       </Flex>
 
       <SectionsTable
@@ -60,6 +65,10 @@ export const AdminSectionsPage = () => {
         onSearchChange={onSearchChange}
         onRefresh={onRefresh}
       />
+
+      <CreateSectionDialog />
+      <EditSectionDialog />
+      <DeleteSectionDialog />
     </Box>
   );
 };

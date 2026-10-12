@@ -4,6 +4,9 @@ import { createEffect, createEvent, createStore, sample } from 'effector';
 import { projectModel, type ProjectResponseDto } from '@/entities/project';
 import { sectionModel } from '@/entities/section';
 import { chainAdmin } from '@/entities/session';
+import { createSectionModel } from '@/features/create-section';
+import { deleteSectionModel } from '@/features/delete-section';
+import { editSectionModel } from '@/features/edit-section';
 import { notifyErrorFx } from '@/shared/ui';
 
 export const adminSectionsRoute = createRoute<{ id: string }>();
@@ -64,7 +67,43 @@ sample({
 });
 
 sample({
+  clock: [
+    sectionModel.createFx.done,
+    sectionModel.updateFx.done,
+    sectionModel.removeFx.done,
+  ],
+  source: adminSectionsRoute.$params,
+  filter: ({ id }) => isValidProjectId(id),
+  fn: ({ id }) => toProjectId(id),
+  target: sectionModel.sectionsRequested,
+});
+
+sample({
   clock: sectionModel.findAllFx.failData,
   fn: (error) => error.message,
   target: notifyErrorFx,
+});
+
+sample({
+  clock: createSectionModel.openRequested,
+  target: [
+    editSectionModel.closeRequested,
+    deleteSectionModel.closeRequested,
+  ],
+});
+
+sample({
+  clock: editSectionModel.openRequested,
+  target: [
+    createSectionModel.closeRequested,
+    deleteSectionModel.closeRequested,
+  ],
+});
+
+sample({
+  clock: deleteSectionModel.openRequested,
+  target: [
+    createSectionModel.closeRequested,
+    editSectionModel.closeRequested,
+  ],
 });

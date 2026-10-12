@@ -12,6 +12,8 @@ import { RefreshCw, Search } from 'lucide-react';
 
 import { asNullableString } from '@/entities/project';
 import type { SectionResponseDto } from '@/entities/section';
+import { DeleteSectionButton } from '@/features/delete-section';
+import { EditSectionButton } from '@/features/edit-section';
 
 import { formatSectionDate, formatSectionsCount } from '../lib';
 
@@ -19,12 +21,14 @@ interface SectionsTableColumn {
   id: string;
   label: string;
   w?: string;
+  textAlign?: 'left' | 'center' | 'right';
 }
 
 const SECTIONS_TABLE_COLUMNS: SectionsTableColumn[] = [
   { id: 'name', label: 'Название' },
   { id: 'figmaId', label: 'Figma ID', w: '160px' },
   { id: 'lastModified', label: 'Последнее обновление', w: '220px' },
+  { id: 'actions', label: 'Действия', w: '140px', textAlign: 'right' },
 ];
 
 interface SectionsTableProps {
@@ -108,6 +112,7 @@ export function SectionsTable({
                   py="3.5"
                   borderColor="border"
                   w={column.w}
+                  textAlign={column.textAlign}
                 >
                   {column.label}
                 </Table.ColumnHeader>
@@ -187,6 +192,12 @@ export function SectionsTable({
                     >
                       {formatSectionDate(section.lastModified)}
                     </Text>
+                  </Table.Cell>
+                  <Table.Cell px="5" py="4">
+                    <Flex justify="flex-end" align="center" gap="3.5">
+                      <EditSectionButton section={section} />
+                      <DeleteSectionButton section={section} />
+                    </Flex>
                   </Table.Cell>
                 </Table.Row>
               );
