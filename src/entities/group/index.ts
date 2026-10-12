@@ -4,6 +4,7 @@ export type {
   CreateGroupParams,
   FindAllGroupsParams,
   GroupResponseDto,
+  SectionGroupsControllerFindAllParams,
   UpdateGroupDto,
   UpdateGroupParams,
 } from './model';

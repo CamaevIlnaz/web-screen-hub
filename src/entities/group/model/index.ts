@@ -3,16 +3,20 @@ import {
   $groups,
   $isLoading,
   $isMutating,
+  $search,
   groupCreateSubmitted,
   groupRemoveRequested,
   groupsRequested,
   groupUpdateSubmitted,
+  searchChanged,
 } from './stores';
 
 export const groupModel = {
   $groups,
+  $search,
   $isLoading,
   $isMutating,
+  searchChanged,
   groupsRequested,
   groupCreateSubmitted,
   groupUpdateSubmitted,
@@ -29,6 +33,7 @@ export type {
   CreateGroupParams,
   FindAllGroupsParams,
   GroupResponseDto,
+  SectionGroupsControllerFindAllParams,
   UpdateGroupDto,
   UpdateGroupParams,
 } from './types';

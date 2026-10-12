@@ -8,25 +8,35 @@
 import type {
   CreateGroupDto,
   GroupResponseDto,
+  SectionGroupsControllerFindAllParams,
   UpdateGroupDto
 } from '../model';
 
 import { customFetch } from '../../http-client';
 
-export const getSectionGroupsControllerFindAllUrl = (sectionId: number,) => {
+export const getSectionGroupsControllerFindAllUrl = (sectionId: number,
+    params?: SectionGroupsControllerFindAllParams,) => {
+  const normalizedParams = new URLSearchParams();
 
+  Object.entries(params || {}).forEach(([key, value]) => {
 
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
 
+  const stringifiedParams = normalizedParams.toString();
 
-  return `/api/sections/${sectionId}/groups`
+  return stringifiedParams.length > 0 ? `/api/sections/${sectionId}/groups?${stringifiedParams}` : `/api/sections/${sectionId}/groups`
 }
 
 /**
  * @summary Список групп раздела
  */
-export const sectionGroupsControllerFindAll = async (sectionId: number, options?: Parameters<typeof customFetch>[1]): Promise<GroupResponseDto[]> => {
+export const sectionGroupsControllerFindAll = async (sectionId: number,
+    params?: SectionGroupsControllerFindAllParams, options?: Parameters<typeof customFetch>[1]): Promise<GroupResponseDto[]> => {
 
-  return customFetch<GroupResponseDto[]>(getSectionGroupsControllerFindAllUrl(sectionId),
+  return customFetch<GroupResponseDto[]>(getSectionGroupsControllerFindAllUrl(sectionId,params),
   {
     ...options,
     method: 'GET'

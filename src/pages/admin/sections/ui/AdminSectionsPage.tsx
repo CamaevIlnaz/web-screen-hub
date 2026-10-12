@@ -1,6 +1,7 @@
 import { Box, Breadcrumb, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
+import type { ReactNode } from 'react';
 
 import { sectionModel } from '@/entities/section';
 import { CreateSectionButton, CreateSectionDialog } from '@/features/create-section';
@@ -9,19 +10,25 @@ import { EditSectionDialog } from '@/features/edit-section';
 import { Title } from '@/shared/ui';
 
 import { adminProjectsRoute } from '../../projects';
-import { $project, refreshClicked, searchInputChanged } from '../model';
+import { $project, searchInputChanged } from '../model';
 import { SectionsTable } from './sections-table';
 
-export const AdminSectionsPage = () => {
-  const [project, sections, search, isLoading, onSearchChange, onRefresh] =
-    useUnit([
-      $project,
-      sectionModel.$sections,
-      sectionModel.$search,
-      sectionModel.$isLoading,
-      searchInputChanged,
-      refreshClicked,
-    ]);
+interface AdminSectionsPageProps {
+  children?: ReactNode;
+}
+
+export const AdminSectionsPage = ({ children }: AdminSectionsPageProps) => {
+  const [project, sections, search, isLoading, onSearchChange] = useUnit([
+    $project,
+    sectionModel.$sections,
+    sectionModel.$search,
+    sectionModel.$isLoading,
+    searchInputChanged,
+  ]);
+
+  if (children) {
+    return children;
+  }
 
   return (
     <Box px="8" py="8">
@@ -63,7 +70,6 @@ export const AdminSectionsPage = () => {
         search={search}
         isLoading={isLoading}
         onSearchChange={onSearchChange}
-        onRefresh={onRefresh}
       />
 
       <CreateSectionDialog />

@@ -8,7 +8,7 @@ import { DeleteProjectDialog } from '@/features/delete-project';
 import { EditProjectDialog } from '@/features/edit-project';
 import { Title } from '@/shared/ui';
 
-import { refreshClicked, searchInputChanged } from '../model';
+import { searchInputChanged } from '../model';
 import { ProjectsTable } from './projects-table';
 
 interface AdminProjectsPageProps {
@@ -16,12 +16,11 @@ interface AdminProjectsPageProps {
 }
 
 export const AdminProjectsPage = ({ children }: AdminProjectsPageProps) => {
-  const [projects, search, isLoading, onSearchChange, onRefresh] = useUnit([
+  const [projects, search, isLoading, onSearchChange] = useUnit([
     projectModel.$projects,
     projectModel.$search,
     projectModel.$isLoading,
     searchInputChanged,
-    refreshClicked,
   ]);
 
   if (children) {
@@ -52,7 +51,6 @@ export const AdminProjectsPage = ({ children }: AdminProjectsPageProps) => {
         search={search}
         isLoading={isLoading}
         onSearchChange={onSearchChange}
-        onRefresh={onRefresh}
       />
 
       <CreateProjectDialog />

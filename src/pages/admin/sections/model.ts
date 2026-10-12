@@ -13,7 +13,6 @@ export const adminSectionsRoute = createRoute<{ id: string }>();
 export const chainAdminSectionsRoute = chainAdmin(adminSectionsRoute);
 
 export const searchInputChanged = createEvent<string>();
-export const refreshClicked = createEvent();
 
 export const $project = createStore<ProjectResponseDto | null>(null)
   .on(projectModel.findOneFx.doneData, (_, project) => project)
@@ -55,14 +54,6 @@ sample({
   filter: ({ search, params }, debounced) =>
     search === debounced && isValidProjectId(params.id),
   fn: ({ params }) => toProjectId(params.id),
-  target: sectionModel.sectionsRequested,
-});
-
-sample({
-  clock: refreshClicked,
-  source: adminSectionsRoute.$params,
-  filter: ({ id }) => isValidProjectId(id),
-  fn: ({ id }) => toProjectId(id),
   target: sectionModel.sectionsRequested,
 });
 

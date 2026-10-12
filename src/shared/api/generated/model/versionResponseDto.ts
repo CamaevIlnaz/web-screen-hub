@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { VersionResponseDtoDescription } from './versionResponseDtoDescription';
+import type { VersionResponseDtoUploadType } from './versionResponseDtoUploadType';
 
 export interface VersionResponseDto {
   /** Идентификатор версии */
@@ -21,6 +22,8 @@ export interface VersionResponseDto {
   description?: VersionResponseDtoDescription;
   /** Путь к файлу относительно uploads (URL: /uploads/{filename}) */
   filename: string;
+  /** Тип загрузки: ручная или автоматическая */
+  uploadType: VersionResponseDtoUploadType;
   /** Дата создания */
   createdAt: string;
 }

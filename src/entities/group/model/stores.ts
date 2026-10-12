@@ -8,10 +8,13 @@ import type {
   UpdateGroupParams,
 } from './types';
 
+export const searchChanged = createEvent<string>();
 export const groupsRequested = createEvent<number>();
 export const groupCreateSubmitted = createEvent<CreateGroupParams>();
 export const groupUpdateSubmitted = createEvent<UpdateGroupParams>();
 export const groupRemoveRequested = createEvent<number>();
+
+export const $search = createStore('').on(searchChanged, (_, search) => search);
 
 export const $groups = createStore<GroupResponseDto[]>([])
   .on(findAllFx.doneData, (_, groups) => groups)
@@ -32,7 +35,11 @@ export const $isMutating = combine(
 
 sample({
   clock: groupsRequested,
-  fn: (sectionId): FindAllGroupsParams => ({ sectionId }),
+  source: $search,
+  fn: (search, sectionId): FindAllGroupsParams => ({
+    sectionId,
+    params: search ? { search } : undefined,
+  }),
   target: findAllFx,
 });
 

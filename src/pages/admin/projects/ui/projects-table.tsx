@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  IconButton,
   Image,
   Input,
   InputGroup,
@@ -10,7 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useUnit } from 'effector-react';
-import { RefreshCw, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 import {
   asNullableString,
@@ -42,7 +41,6 @@ interface ProjectsTableProps {
   search: string;
   isLoading: boolean;
   onSearchChange: (value: string) => void;
-  onRefresh: () => void;
 }
 
 export function ProjectsTable({
@@ -50,7 +48,6 @@ export function ProjectsTable({
   search,
   isLoading,
   onSearchChange,
-  onRefresh,
 }: ProjectsTableProps) {
   const openSections = useUnit(adminSectionsRoute.open);
 
@@ -62,7 +59,7 @@ export function ProjectsTable({
       borderColor="border"
       overflow="hidden"
     >
-      <Flex align="center" justify="space-between" gap="4" px="5" py="5">
+      <Flex align="center" gap="4" px="5" py="5">
         <InputGroup
           maxW="480px"
           w="100%"
@@ -85,23 +82,6 @@ export function ProjectsTable({
             _placeholder={{ color: 'muted' }}
           />
         </InputGroup>
-
-        <IconButton
-          aria-label="Обновить список"
-          variant="outline"
-          borderRadius="md"
-          borderColor="border"
-          color="text"
-          bg="panel"
-          h="12"
-          w="12"
-          minW="12"
-          loading={isLoading}
-          onClick={onRefresh}
-          _hover={{ bg: 'panelAlt' }}
-        >
-          <RefreshCw size={17} strokeWidth={1.75} />
-        </IconButton>
       </Flex>
 
       <Box overflowX="auto" px="5">

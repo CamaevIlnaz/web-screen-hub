@@ -16,7 +16,7 @@ import type {
 } from './types';
 
 export const findAllFx = createEffect<FindAllGroupsParams, GroupResponseDto[]>(
-  ({ sectionId }) => sectionGroupsControllerFindAll(sectionId),
+  ({ sectionId, params }) => sectionGroupsControllerFindAll(sectionId, params),
 );
 
 export const findOneFx = createEffect<number, GroupResponseDto>((id) =>

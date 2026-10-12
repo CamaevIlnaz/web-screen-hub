@@ -8,25 +8,35 @@
 import type {
   CreateFrameDto,
   FrameResponseDto,
+  GroupFramesControllerFindAllParams,
   UpdateFrameDto
 } from '../model';
 
 import { customFetch } from '../../http-client';
 
-export const getGroupFramesControllerFindAllUrl = (groupId: number,) => {
+export const getGroupFramesControllerFindAllUrl = (groupId: number,
+    params?: GroupFramesControllerFindAllParams,) => {
+  const normalizedParams = new URLSearchParams();
 
+  Object.entries(params || {}).forEach(([key, value]) => {
 
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : String(value))
+    }
+  });
 
+  const stringifiedParams = normalizedParams.toString();
 
-  return `/api/groups/${groupId}/frames`
+  return stringifiedParams.length > 0 ? `/api/groups/${groupId}/frames?${stringifiedParams}` : `/api/groups/${groupId}/frames`
 }
 
 /**
  * @summary Список фреймов группы
  */
-export const groupFramesControllerFindAll = async (groupId: number, options?: Parameters<typeof customFetch>[1]): Promise<FrameResponseDto[]> => {
+export const groupFramesControllerFindAll = async (groupId: number,
+    params?: GroupFramesControllerFindAllParams, options?: Parameters<typeof customFetch>[1]): Promise<FrameResponseDto[]> => {
 
-  return customFetch<FrameResponseDto[]>(getGroupFramesControllerFindAllUrl(groupId),
+  return customFetch<FrameResponseDto[]>(getGroupFramesControllerFindAllUrl(groupId,params),
   {
     ...options,
     method: 'GET'

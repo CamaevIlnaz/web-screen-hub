@@ -1,21 +1,23 @@
 import {
   Box,
   Flex,
-  IconButton,
   Input,
   InputGroup,
   Spinner,
   Table,
   Text,
 } from '@chakra-ui/react';
-import { RefreshCw, Search } from 'lucide-react';
+import { useUnit } from 'effector-react';
+import { Search } from 'lucide-react';
 
 import { asNullableString } from '@/entities/project';
 import type { SectionResponseDto } from '@/entities/section';
 import { DeleteSectionButton } from '@/features/delete-section';
 import { EditSectionButton } from '@/features/edit-section';
 
+import { adminGroupsRoute } from '../../groups';
 import { formatSectionDate, formatSectionsCount } from '../lib';
+import { adminSectionsRoute } from '../model';
 
 interface SectionsTableColumn {
   id: string;
@@ -36,7 +38,6 @@ interface SectionsTableProps {
   search: string;
   isLoading: boolean;
   onSearchChange: (value: string) => void;
-  onRefresh: () => void;
 }
 
 export function SectionsTable({
@@ -44,8 +45,12 @@ export function SectionsTable({
   search,
   isLoading,
   onSearchChange,
-  onRefresh,
 }: SectionsTableProps) {
+  const [openGroups, routeParams] = useUnit([
+    adminGroupsRoute.open,
+    adminSectionsRoute.$params,
+  ]);
+
   return (
     <Box
       bg="panel"
@@ -54,7 +59,7 @@ export function SectionsTable({
       borderColor="border"
       overflow="hidden"
     >
-      <Flex align="center" justify="space-between" gap="4" px="5" py="5">
+      <Flex align="center" gap="4" px="5" py="5">
         <InputGroup
           maxW="480px"
           w="100%"
@@ -77,23 +82,6 @@ export function SectionsTable({
             _placeholder={{ color: 'muted' }}
           />
         </InputGroup>
-
-        <IconButton
-          aria-label="Обновить список"
-          variant="outline"
-          borderRadius="md"
-          borderColor="border"
-          color="text"
-          bg="panel"
-          h="12"
-          w="12"
-          minW="12"
-          loading={isLoading}
-          onClick={onRefresh}
-          _hover={{ bg: 'panelAlt' }}
-        >
-          <RefreshCw size={17} strokeWidth={1.75} />
-        </IconButton>
       </Flex>
 
       <Box overflowX="auto" px="5">
@@ -153,7 +141,18 @@ export function SectionsTable({
               const figmaId = asNullableString(section.figmaId);
 
               return (
-                <Table.Row key={section.id} bg="panel">
+                <Table.Row
+                  key={section.id}
+                  bg="panel"
+                  cursor="pointer"
+                  _hover={{ bg: 'panelAlt' }}
+                  onClick={() =>
+                    openGroups({
+                      id: routeParams.id,
+                      sectionId: String(section.id),
+                    })
+                  }
+                >
                   <Table.Cell px="5" py="4" h="20">
                     <Box minW="0">
                       <Text
@@ -193,7 +192,11 @@ export function SectionsTable({
                       {formatSectionDate(section.lastModified)}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell px="5" py="4">
+                  <Table.Cell
+                    px="5"
+                    py="4"
+                    onClick={(event) => event.stopPropagation()}
+                  >
                     <Flex justify="flex-end" align="center" gap="3.5">
                       <EditSectionButton section={section} />
                       <DeleteSectionButton section={section} />

@@ -12,7 +12,6 @@ export const adminProjectsRoute = createRoute();
 export const chainAdminProjectsRoute = chainAdmin(adminProjectsRoute);
 
 export const searchInputChanged = createEvent<string>();
-export const refreshClicked = createEvent();
 
 const debounceSearchFx = createEffect(async (value: string) => {
   await new Promise((resolve) => {
@@ -36,11 +35,6 @@ sample({
   clock: debounceSearchFx.doneData,
   source: projectModel.$search,
   filter: (search, debounced) => search === debounced,
-  target: projectModel.projectsRequested,
-});
-
-sample({
-  clock: refreshClicked,
   target: projectModel.projectsRequested,
 });
 

@@ -1,5 +1,6 @@
 import { ProjectsPage, projectsRoute } from './projects';
 import { AdminPage, adminRoute } from './admin';
+import { AdminGroupsPage, adminGroupsRoute } from './admin/groups';
 import { AdminProjectsPage, adminProjectsRoute } from './admin/projects';
 import { AdminSectionsPage, adminSectionsRoute } from './admin/sections';
 import { AdminSettingsPage, adminSettingsRoute } from './admin/settings';
@@ -25,6 +26,13 @@ export const routes = [
             path: '/:id',
             route: adminSectionsRoute,
             view: AdminSectionsPage,
+            routes: [
+              {
+                path: '/:sectionId',
+                route: adminGroupsRoute,
+                view: AdminGroupsPage,
+              },
+            ],
           },
         ],
       },
