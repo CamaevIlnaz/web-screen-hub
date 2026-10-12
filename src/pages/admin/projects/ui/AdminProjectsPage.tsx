@@ -1,5 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { useUnit } from 'effector-react';
+import type { ReactNode } from 'react';
 
 import { projectModel } from '@/entities/project';
 import { CreateProjectButton, CreateProjectDialog } from '@/features/create-project';
@@ -10,7 +11,11 @@ import { Title } from '@/shared/ui';
 import { refreshClicked, searchInputChanged } from '../model';
 import { ProjectsTable } from './projects-table';
 
-export const AdminProjectsPage = () => {
+interface AdminProjectsPageProps {
+  children?: ReactNode;
+}
+
+export const AdminProjectsPage = ({ children }: AdminProjectsPageProps) => {
   const [projects, search, isLoading, onSearchChange, onRefresh] = useUnit([
     projectModel.$projects,
     projectModel.$search,
@@ -18,6 +23,10 @@ export const AdminProjectsPage = () => {
     searchInputChanged,
     refreshClicked,
   ]);
+
+  if (children) {
+    return children;
+  }
 
   return (
     <Box px="8" py="8">

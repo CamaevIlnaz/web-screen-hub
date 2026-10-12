@@ -1,6 +1,7 @@
 import { ProjectsPage, projectsRoute } from './projects';
 import { AdminPage, adminRoute } from './admin';
 import { AdminProjectsPage, adminProjectsRoute } from './admin/projects';
+import { AdminSectionsPage, adminSectionsRoute } from './admin/sections';
 import { AdminSettingsPage, adminSettingsRoute } from './admin/settings';
 import { NotFoundPage, notFoundRoute } from './not-found';
 
@@ -22,17 +23,17 @@ export const routes = [
         routes: [
           {
             path: '/:id',
-            route: adminProjectsRoute,
-            view: AdminProjectsPage,
+            route: adminSectionsRoute,
+            view: AdminSectionsPage,
           },
-        ]
+        ],
       },
       {
         path: '/settings',
         route: adminSettingsRoute,
         view: AdminSettingsPage,
       },
-    ]
+    ],
   },
 ]
 

@@ -9,6 +9,7 @@ import {
   Table,
   Text,
 } from '@chakra-ui/react';
+import { useUnit } from 'effector-react';
 import { RefreshCw, Search } from 'lucide-react';
 
 import {
@@ -20,6 +21,7 @@ import { DeleteProjectButton } from '@/features/delete-project';
 import { EditProjectButton } from '@/features/edit-project';
 
 import { formatProjectDate, formatProjectsCount } from '../lib';
+import { adminSectionsRoute } from '../../sections';
 
 interface ProjectsTableColumn {
   id: string;
@@ -50,6 +52,8 @@ export function ProjectsTable({
   onSearchChange,
   onRefresh,
 }: ProjectsTableProps) {
+  const openSections = useUnit(adminSectionsRoute.open);
+
   return (
     <Box
       bg="panel"
@@ -158,7 +162,13 @@ export function ProjectsTable({
               const previewUrl = getProjectPreviewUrl(project.preview);
 
               return (
-                <Table.Row key={project.id} bg="panel">
+                <Table.Row
+                  key={project.id}
+                  bg="panel"
+                  cursor="pointer"
+                  _hover={{ bg: 'panelAlt' }}
+                  onClick={() => openSections({ id: String(project.id) })}
+                >
                   <Table.Cell px="5" py="4" h="20">
                     <Flex align="center" gap="4" minW="0">
                       <Box
@@ -220,7 +230,11 @@ export function ProjectsTable({
                       {formatProjectDate(project.lastModified)}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell px="5" py="4">
+                  <Table.Cell
+                    px="5"
+                    py="4"
+                    onClick={(event) => event.stopPropagation()}
+                  >
                     <Flex justify="flex-end" align="center" gap="3.5">
                       <EditProjectButton project={project} />
                       <DeleteProjectButton project={project} />
