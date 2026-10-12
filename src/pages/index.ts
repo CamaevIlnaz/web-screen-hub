@@ -19,6 +19,13 @@ export const routes = [
         path: '/projects',
         route: adminProjectsRoute,
         view: AdminProjectsPage,
+        routes: [
+          {
+            path: '/:id',
+            route: adminProjectsRoute,
+            view: AdminProjectsPage,
+          },
+        ]
       },
       {
         path: '/settings',
