@@ -1,5 +1,6 @@
 import { ProjectsPage, projectsRoute } from './projects';
 import { AdminPage, adminRoute } from './admin';
+import { AdminFramesPage, adminFramesRoute } from './admin/frames';
 import { AdminGroupsPage, adminGroupsRoute } from './admin/groups';
 import { AdminProjectsPage, adminProjectsRoute } from './admin/projects';
 import { AdminSectionsPage, adminSectionsRoute } from './admin/sections';
@@ -31,6 +32,13 @@ export const routes = [
                 path: '/:sectionId',
                 route: adminGroupsRoute,
                 view: AdminGroupsPage,
+                routes: [
+                  {
+                    path: '/:groupId',
+                    route: adminFramesRoute,
+                    view: AdminFramesPage,
+                  },
+                ],
               },
             ],
           },

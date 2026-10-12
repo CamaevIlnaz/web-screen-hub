@@ -1,6 +1,7 @@
 import { Box, Breadcrumb, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'atomic-router-react';
 import { useUnit } from 'effector-react';
+import type { ReactNode } from 'react';
 
 import { groupModel } from '@/entities/group';
 import { CreateGroupButton, CreateGroupDialog } from '@/features/create-group';
@@ -13,7 +14,11 @@ import { adminSectionsRoute } from '../../sections';
 import { $project, $section, searchInputChanged } from '../model';
 import { GroupsTable } from './groups-table';
 
-export const AdminGroupsPage = () => {
+interface AdminGroupsPageProps {
+  children?: ReactNode;
+}
+
+export const AdminGroupsPage = ({ children }: AdminGroupsPageProps) => {
   const [project, section, groups, search, isLoading, onSearchChange] = useUnit([
     $project,
     $section,
@@ -22,6 +27,10 @@ export const AdminGroupsPage = () => {
     groupModel.$isLoading,
     searchInputChanged,
   ]);
+
+  if (children) {
+    return children;
+  }
 
   return (
     <Box px="8" py="8">

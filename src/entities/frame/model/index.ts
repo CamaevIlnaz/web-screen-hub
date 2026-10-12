@@ -3,16 +3,20 @@ import {
   $frames,
   $isLoading,
   $isMutating,
+  $search,
   frameCreateSubmitted,
   frameRemoveRequested,
   framesRequested,
   frameUpdateSubmitted,
+  searchChanged,
 } from './stores';
 
 export const frameModel = {
   $frames,
+  $search,
   $isLoading,
   $isMutating,
+  searchChanged,
   framesRequested,
   frameCreateSubmitted,
   frameUpdateSubmitted,
@@ -29,6 +33,7 @@ export type {
   CreateFrameParams,
   FindAllFramesParams,
   FrameResponseDto,
+  GroupFramesControllerFindAllParams,
   UpdateFrameDto,
   UpdateFrameParams,
 } from './types';

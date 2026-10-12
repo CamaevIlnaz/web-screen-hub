@@ -16,7 +16,7 @@ import type {
 } from './types';
 
 export const findAllFx = createEffect<FindAllFramesParams, FrameResponseDto[]>(
-  ({ groupId }) => groupFramesControllerFindAll(groupId),
+  ({ groupId, params }) => groupFramesControllerFindAll(groupId, params),
 );
 
 export const findOneFx = createEffect<number, FrameResponseDto>((id) =>

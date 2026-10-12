@@ -8,10 +8,13 @@ import type {
   UpdateFrameParams,
 } from './types';
 
+export const searchChanged = createEvent<string>();
 export const framesRequested = createEvent<number>();
 export const frameCreateSubmitted = createEvent<CreateFrameParams>();
 export const frameUpdateSubmitted = createEvent<UpdateFrameParams>();
 export const frameRemoveRequested = createEvent<number>();
+
+export const $search = createStore('').on(searchChanged, (_, search) => search);
 
 export const $frames = createStore<FrameResponseDto[]>([])
   .on(findAllFx.doneData, (_, frames) => frames)
@@ -32,7 +35,11 @@ export const $isMutating = combine(
 
 sample({
   clock: framesRequested,
-  fn: (groupId): FindAllFramesParams => ({ groupId }),
+  source: $search,
+  fn: (search, groupId): FindAllFramesParams => ({
+    groupId,
+    params: search ? { search } : undefined,
+  }),
   target: findAllFx,
 });
 

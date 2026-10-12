@@ -4,6 +4,7 @@ export type {
   CreateFrameParams,
   FindAllFramesParams,
   FrameResponseDto,
+  GroupFramesControllerFindAllParams,
   UpdateFrameDto,
   UpdateFrameParams,
 } from './model';

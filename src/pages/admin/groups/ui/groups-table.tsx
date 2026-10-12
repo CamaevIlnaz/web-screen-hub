@@ -7,6 +7,7 @@ import {
   Table,
   Text,
 } from '@chakra-ui/react';
+import { useUnit } from 'effector-react';
 import { Search } from 'lucide-react';
 
 import type { GroupResponseDto } from '@/entities/group';
@@ -14,7 +15,9 @@ import { asNullableString } from '@/entities/project';
 import { DeleteGroupButton } from '@/features/delete-group';
 import { EditGroupButton } from '@/features/edit-group';
 
+import { adminFramesRoute } from '../../frames';
 import { formatGroupDate, formatGroupsCount } from '../lib';
+import { adminGroupsRoute } from '../model';
 
 interface GroupsTableColumn {
   id: string;
@@ -43,6 +46,11 @@ export function GroupsTable({
   isLoading,
   onSearchChange,
 }: GroupsTableProps) {
+  const [openFrames, routeParams] = useUnit([
+    adminFramesRoute.open,
+    adminGroupsRoute.$params,
+  ]);
+
   return (
     <Box
       bg="panel"
@@ -133,7 +141,19 @@ export function GroupsTable({
               const figmaId = asNullableString(group.figmaId);
 
               return (
-                <Table.Row key={group.id} bg="panel">
+                <Table.Row
+                  key={group.id}
+                  bg="panel"
+                  cursor="pointer"
+                  _hover={{ bg: 'panelAlt' }}
+                  onClick={() =>
+                    openFrames({
+                      id: routeParams.id,
+                      sectionId: routeParams.sectionId,
+                      groupId: String(group.id),
+                    })
+                  }
+                >
                   <Table.Cell px="5" py="4" h="20">
                     <Box minW="0">
                       <Text
@@ -173,7 +193,11 @@ export function GroupsTable({
                       {formatGroupDate(group.createdAt)}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell px="5" py="4">
+                  <Table.Cell
+                    px="5"
+                    py="4"
+                    onClick={(event) => event.stopPropagation()}
+                  >
                     <Flex justify="flex-end" align="center" gap="3.5">
                       <EditGroupButton group={group} />
                       <DeleteGroupButton group={group} />
