@@ -7,6 +7,9 @@
  */
 import type { SectionResponseDtoDescription } from './sectionResponseDtoDescription';
 import type { SectionResponseDtoFigmaId } from './sectionResponseDtoFigmaId';
+import type { SectionResponseDtoFigmaSyncedAt } from './sectionResponseDtoFigmaSyncedAt';
+import type { SectionResponseDtoSyncError } from './sectionResponseDtoSyncError';
+import type { SectionResponseDtoSyncStatus } from './sectionResponseDtoSyncStatus';
 
 export interface SectionResponseDto {
   /** Идентификатор раздела */
@@ -25,6 +28,21 @@ export interface SectionResponseDto {
      * @nullable
      */
   figmaId?: SectionResponseDtoFigmaId;
+  /**
+     * Статус последней синхронизации с Figma (null — ещё не синхронизировался)
+     * @nullable
+     */
+  syncStatus?: SectionResponseDtoSyncStatus;
+  /**
+     * Ошибки последней синхронизации с Figma
+     * @nullable
+     */
+  syncError?: SectionResponseDtoSyncError;
+  /**
+     * Дата последней синхронизации с Figma
+     * @nullable
+     */
+  figmaSyncedAt?: SectionResponseDtoFigmaSyncedAt;
   /** Дата последнего изменения */
   lastModified: string;
   /** Дата создания */
