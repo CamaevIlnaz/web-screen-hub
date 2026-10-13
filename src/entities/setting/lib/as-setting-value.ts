@@ -1,4 +1,4 @@
-/** Приводит nullable-поле value (в OpenAPI сейчас object) к строке. */
+/** Приводит значение настройки к непустой строке. */
 export function asSettingValue(value: unknown): string | null {
   if (typeof value !== 'string') {
     return null;

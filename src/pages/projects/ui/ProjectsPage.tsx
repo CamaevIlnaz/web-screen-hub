@@ -11,18 +11,19 @@ import { Card } from '@/shared/ui';
 import { BaseLayout } from '@/widgets/base-layout';
 import { Header } from '@/widgets/header';
 
-import { projectOpened } from '../model';
+import { $figmaLink, projectOpened } from '../model';
 
 export const ProjectsPage = () => {
-  const [projects, onProjectOpen] = useUnit([
+  const [projects, figmaLink, onProjectOpen] = useUnit([
     projectModel.$projects,
+    $figmaLink,
     projectOpened,
   ]);
 
   return (
     <BaseLayout>
       <Stack gap={10}>
-        <Header title="Проекты" />
+        <Header title="Проекты" figmaUrl={figmaLink ?? undefined} />
 
         {projects.length === 0 ? (
           <Text color="whiteAlpha.700">Проекты не найдены</Text>

@@ -5,4 +5,9 @@ export type {
   UpdateSettingDto,
   UpdateSettingParams,
 } from './model';
-export { asSettingValue } from './lib';
+export {
+  asSettingValue,
+  getSettingValue,
+  SETTING_KEYS,
+  type SettingKey,
+} from './lib';
