@@ -21,8 +21,6 @@ function createViewRoutes(
   });
 }
 
-console.log(createViewRoutes(routes))
-
 export const RoutesView = createRoutesView({
   routes: createViewRoutes(routes),
   otherwise: NotFoundPage,

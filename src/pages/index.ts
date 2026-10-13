@@ -1,4 +1,6 @@
 import { ProjectsPage, projectsRoute } from './projects';
+import { SectionsPage, sectionsRoute } from './sections';
+import { FramesPage, framesRoute } from './frames';
 import { AdminPage, adminRoute } from './admin';
 import { AdminFramesPage, adminFramesRoute } from './admin/frames';
 import { AdminGroupsPage, adminGroupsRoute } from './admin/groups';
@@ -8,11 +10,6 @@ import { AdminSettingsPage, adminSettingsRoute } from './admin/settings';
 import { NotFoundPage, notFoundRoute } from './not-found';
 
 export const routes = [
-  {
-    path: '/',
-    route: projectsRoute,
-    view: ProjectsPage,
-  },
   {
     path: '/admin',
     route: adminRoute,
@@ -48,6 +45,25 @@ export const routes = [
         path: '/settings',
         route: adminSettingsRoute,
         view: AdminSettingsPage,
+      },
+    ],
+  },
+  {
+    path: '/',
+    route: projectsRoute,
+    view: ProjectsPage,
+    routes: [
+      {
+        path: '/:id',
+        route: sectionsRoute,
+        view: SectionsPage,
+        routes: [
+          {
+            path: '/:sectionId',
+            route: framesRoute,
+            view: FramesPage,
+          },
+        ],
       },
     ],
   },

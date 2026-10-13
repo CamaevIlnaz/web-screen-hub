@@ -22,6 +22,5 @@ export const router = createHistoryRouter({
   routes: createHistoryRoutes(routes),
   notFoundRoute,
 });
-console.log(createHistoryRoutes(routes))
 
 router.setHistory(createBrowserHistory());
