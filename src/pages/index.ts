@@ -55,23 +55,19 @@ export const routes = [
     ],
   },
   {
+    path: '/:id/:sectionId',
+    route: framesRoute,
+    view: FramesPage,
+  },
+  {
+    path: '/:id',
+    route: sectionsRoute,
+    view: SectionsPage,
+  },
+  {
     path: '/',
     route: projectsRoute,
     view: ProjectsPage,
-    routes: [
-      {
-        path: '/:id',
-        route: sectionsRoute,
-        view: SectionsPage,
-        routes: [
-          {
-            path: '/:sectionId',
-            route: framesRoute,
-            view: FramesPage,
-          },
-        ],
-      },
-    ],
   },
 ]
 

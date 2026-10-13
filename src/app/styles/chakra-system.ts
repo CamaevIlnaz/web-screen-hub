@@ -31,8 +31,8 @@ const config = defineConfig({
         xl: { value: theme.radius.xl },
       },
       fonts: {
-        body: { value: 'Manrope, system-ui, sans-serif' },
-        heading: { value: 'Manrope, system-ui, sans-serif' },
+        body: { value: 'Inter, system-ui, sans-serif' },
+        heading: { value: 'Inter, system-ui, sans-serif' },
       },
     },
   },
