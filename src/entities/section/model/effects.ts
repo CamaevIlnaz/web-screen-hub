@@ -1,5 +1,6 @@
 import { createEffect } from 'effector';
 
+import { sectionFigmaSyncControllerSync } from '@/shared/api/generated/figma/figma';
 import {
   projectSectionsControllerCreate,
   projectSectionsControllerFindAll,
@@ -10,6 +11,7 @@ import {
 
 import type {
   CreateSectionParams,
+  FigmaSyncResultDto,
   FindAllSectionsParams,
   SectionResponseDto,
   UpdateSectionParams,
@@ -35,3 +37,7 @@ export const removeFx = createEffect<number, number>(async (id) => {
   await sectionsControllerRemove(id);
   return id;
 });
+
+export const syncFx = createEffect<number, FigmaSyncResultDto>((id) =>
+  sectionFigmaSyncControllerSync(id),
+);

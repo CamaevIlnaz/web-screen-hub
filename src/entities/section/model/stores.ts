@@ -1,6 +1,6 @@
 import { combine, createEvent, createStore, sample } from 'effector';
 
-import { createFx, findAllFx, removeFx, updateFx } from './effects';
+import { createFx, findAllFx, removeFx, syncFx, updateFx } from './effects';
 import type {
   CreateSectionParams,
   FindAllSectionsParams,
@@ -13,6 +13,7 @@ export const sectionsRequested = createEvent<number>();
 export const sectionCreateSubmitted = createEvent<CreateSectionParams>();
 export const sectionUpdateSubmitted = createEvent<UpdateSectionParams>();
 export const sectionRemoveRequested = createEvent<number>();
+export const sectionSyncRequested = createEvent<number>();
 
 export const $search = createStore('').on(searchChanged, (_, search) => search);
 
@@ -32,6 +33,10 @@ export const $isMutating = combine(
   removeFx.pending,
   (isCreating, isUpdating, isRemoving) => isCreating || isUpdating || isRemoving,
 );
+
+export const $syncingIds = createStore<number[]>([])
+  .on(syncFx, (ids, id) => [...ids, id])
+  .on(syncFx.finally, (ids, { params }) => ids.filter((id) => id !== params));
 
 sample({
   clock: sectionsRequested,
@@ -56,4 +61,12 @@ sample({
 sample({
   clock: sectionRemoveRequested,
   target: removeFx,
+});
+
+sample({
+  clock: sectionSyncRequested,
+  source: $syncingIds,
+  filter: (ids, id) => !ids.includes(id),
+  fn: (_, id) => id,
+  target: syncFx,
 });

@@ -7,6 +7,7 @@ import { AdminGroupsPage, adminGroupsRoute } from './admin/groups';
 import { AdminProjectsPage, adminProjectsRoute } from './admin/projects';
 import { AdminSectionsPage, adminSectionsRoute } from './admin/sections';
 import { AdminSettingsPage, adminSettingsRoute } from './admin/settings';
+import { AdminSyncPage, adminSyncRoute } from './admin/sync';
 import { NotFoundPage, notFoundRoute } from './not-found';
 
 export const routes = [
@@ -40,6 +41,11 @@ export const routes = [
             ],
           },
         ],
+      },
+      {
+        path: '/sync',
+        route: adminSyncRoute,
+        view: AdminSyncPage,
       },
       {
         path: '/settings',

@@ -1,14 +1,18 @@
 import type {
   CreateSectionDto,
+  FigmaSyncResultDto,
   ProjectSectionsControllerFindAllParams,
   SectionResponseDto,
+  SectionResponseDtoSyncStatus,
   UpdateSectionDto,
 } from '@/shared/api/generated/model';
 
 export type {
   CreateSectionDto,
+  FigmaSyncResultDto,
   ProjectSectionsControllerFindAllParams,
   SectionResponseDto,
+  SectionResponseDtoSyncStatus,
   UpdateSectionDto,
 };
 

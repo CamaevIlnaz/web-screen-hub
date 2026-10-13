@@ -11,8 +11,8 @@ export const ProjectsPage = ({ children }: ProjectsPageProps) => {
   return (
     <Layout>
       {children ?? (
-        <Box px="4" pt="20">
-          <Heading as="h1" color="heading" fontSize="2xl">
+        <Box px="4" pt="20" gapX={2}>
+          <Heading as="h1" color="white" fontSize="3xl">
             Проекты
           </Heading>
         </Box>
