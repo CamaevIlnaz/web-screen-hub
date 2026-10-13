@@ -1,4 +1,4 @@
-import { Box, Heading, Stack, Separator, Text } from '@chakra-ui/react';
+import { Box, Stack, Text } from '@chakra-ui/react';
 import { useUnit } from 'effector-react';
 
 import {
@@ -22,13 +22,7 @@ export const ProjectsPage = () => {
   return (
     <BaseLayout>
       <Stack gap={10}>
-        <Stack direction="row" gap={6} alignItems="center">
-          <Header />
-          <Separator orientation="vertical" borderColor="#858585" height="7" />
-          <Heading as="h1" color="white" fontSize="4xl" fontWeight="bold">
-            Проекты
-          </Heading>
-        </Stack>
+        <Header title="Проекты" />
 
         {projects.length === 0 ? (
           <Text color="whiteAlpha.700">Проекты не найдены</Text>

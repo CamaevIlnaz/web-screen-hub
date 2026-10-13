@@ -1,6 +1,6 @@
 import { Image } from '@chakra-ui/react';
 
-import logoSrc from '@/shared/assets/logo.png';
+import logoSrc from '@/shared/assets/logo.svg';
 
 interface LogoProps {
   width?: string | number;

@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type {
+  CreateSettingDto,
   SettingResponseDto,
   UpdateSettingDto
 } from '../model';
@@ -31,6 +32,43 @@ export const settingsControllerFindAll = async ( options?: Parameters<typeof cus
     method: 'GET'
 
 
+  }
+);}
+
+
+export const getSettingsControllerCreateUrl = () => {
+
+
+
+
+  return `/api/settings`
+}
+
+/**
+ * @summary Добавить настройку
+ */
+export const settingsControllerCreate = async (createSettingDto: CreateSettingDto, options?: Parameters<typeof customFetch>[1]): Promise<SettingResponseDto> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<SettingResponseDto>(getSettingsControllerCreateUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(createSettingDto)
   }
 );}
 
@@ -69,6 +107,29 @@ return customFetch<SettingResponseDto>(getSettingsControllerUpdateUrl(key),
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
     body: JSON.stringify(updateSettingDto)
+  }
+);}
+
+
+export const getSettingsControllerRemoveUrl = (key: 'figma.token',) => {
+
+
+
+
+  return `/api/settings/${key}`
+}
+
+/**
+ * @summary Удалить настройку
+ */
+export const settingsControllerRemove = async (key: 'figma.token', options?: Parameters<typeof customFetch>[1]): Promise<void> => {
+
+  return customFetch<void>(getSettingsControllerRemoveUrl(key),
+  {
+    ...options,
+    method: 'DELETE'
+
+
   }
 );}
 

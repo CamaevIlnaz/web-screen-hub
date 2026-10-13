@@ -7,6 +7,7 @@
  */
 import type { ProjectResponseDtoDescription } from './projectResponseDtoDescription';
 import type { ProjectResponseDtoFigmaId } from './projectResponseDtoFigmaId';
+import type { ProjectResponseDtoFigmaLink } from './projectResponseDtoFigmaLink';
 import type { ProjectResponseDtoPreview } from './projectResponseDtoPreview';
 
 export interface ProjectResponseDto {
@@ -24,6 +25,11 @@ export interface ProjectResponseDto {
      * @nullable
      */
   figmaId?: ProjectResponseDtoFigmaId;
+  /**
+     * Ссылка на файл в Figma
+     * @nullable
+     */
+  figmaLink?: ProjectResponseDtoFigmaLink;
   /**
      * Путь к файлу превью относительно uploads (URL: /uploads/{preview})
      * @nullable

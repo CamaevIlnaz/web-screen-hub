@@ -64,6 +64,9 @@ if(createProjectDto.description !== undefined) {
 if(createProjectDto.figmaId !== undefined) {
  formData.append(`figmaId`, createProjectDto.figmaId);
  }
+if(createProjectDto.figmaLink !== undefined) {
+ formData.append(`figmaLink`, createProjectDto.figmaLink);
+ }
 if(createProjectDto.preview !== undefined) {
  formData.append(`preview`, createProjectDto.preview);
  }
@@ -123,6 +126,9 @@ if(updateProjectDto.description !== undefined) {
  }
 if(updateProjectDto.figmaId !== undefined) {
  formData.append(`figmaId`, updateProjectDto.figmaId);
+ }
+if(updateProjectDto.figmaLink !== undefined) {
+ formData.append(`figmaLink`, updateProjectDto.figmaLink);
  }
 if(updateProjectDto.preview !== undefined) {
  formData.append(`preview`, updateProjectDto.preview);

@@ -27,5 +27,5 @@ export function formatCardDate(value: string): string {
   const month = MONTHS[date.getMonth()];
   const year = date.getFullYear();
 
-  return `${hours}:${minutes} ${day} ${month} ${year}`;
+  return `${day} ${month} ${year}, ${hours}:${minutes}`;
 }

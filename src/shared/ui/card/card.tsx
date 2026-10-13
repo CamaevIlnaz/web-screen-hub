@@ -58,14 +58,11 @@ export function Card({ image, title, description, date, onClick }: CardProps) {
         >
           {title}
         </Text>
-        {description ? (
-          <Text fontSize="sm" mb="2" color="whiteAlpha.700">
-            {description}
-          </Text>
-        ) : null}
+        <Text fontSize="sm" mb="2" minHeight={45} color="whiteAlpha.700">
+          {description}
+        </Text>
         <Flex align="center" gap="1.5" color="rgb(136, 136, 136)">
-          <Clock size={14} />
-          <Text fontSize="sm">{date}</Text>
+          <Text fontSize="sm">Обновлено: {date}</Text>
         </Flex>
       </Box>
     </Box>

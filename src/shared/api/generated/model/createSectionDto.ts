@@ -13,4 +13,6 @@ export interface CreateSectionDto {
   description?: string;
   /** Идентификатор ноды в Figma */
   figmaId?: string;
+  /** Ссылка на ноду в Figma */
+  figmaLink?: string;
 }

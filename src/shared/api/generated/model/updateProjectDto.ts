@@ -13,6 +13,8 @@ export interface UpdateProjectDto {
   description?: string;
   /** Идентификатор файла в Figma */
   figmaId?: string;
+  /** Ссылка на файл в Figma */
+  figmaLink?: string;
   /** Превью проекта (png, jpg, webp, svg) */
   preview?: Blob;
 }

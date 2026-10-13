@@ -7,6 +7,7 @@
  */
 import type { SectionResponseDtoDescription } from './sectionResponseDtoDescription';
 import type { SectionResponseDtoFigmaId } from './sectionResponseDtoFigmaId';
+import type { SectionResponseDtoFigmaLink } from './sectionResponseDtoFigmaLink';
 import type { SectionResponseDtoFigmaSyncedAt } from './sectionResponseDtoFigmaSyncedAt';
 import type { SectionResponseDtoSyncError } from './sectionResponseDtoSyncError';
 import type { SectionResponseDtoSyncStatus } from './sectionResponseDtoSyncStatus';
@@ -28,6 +29,11 @@ export interface SectionResponseDto {
      * @nullable
      */
   figmaId?: SectionResponseDtoFigmaId;
+  /**
+     * Ссылка на ноду в Figma
+     * @nullable
+     */
+  figmaLink?: SectionResponseDtoFigmaLink;
   /**
      * Статус последней синхронизации с Figma (null — ещё не синхронизировался)
      * @nullable
