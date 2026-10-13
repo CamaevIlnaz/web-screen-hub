@@ -5,11 +5,12 @@
  * API backend для сервиса просмотра дизайн-макетов
  * OpenAPI spec version: 0.1.0
  */
-import type { CreateSettingDtoKey } from './createSettingDtoKey';
 
 export interface CreateSettingDto {
   /** Ключ настройки */
-  key: CreateSettingDtoKey;
+  key: string;
   /** Значение настройки */
   value: string;
+  /** Доступна без авторизации */
+  publish?: boolean;
 }

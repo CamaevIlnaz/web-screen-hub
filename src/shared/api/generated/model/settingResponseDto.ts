@@ -6,16 +6,14 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { SettingResponseDtoUpdatedAt } from './settingResponseDtoUpdatedAt';
-import type { SettingResponseDtoValue } from './settingResponseDtoValue';
 
 export interface SettingResponseDto {
   /** Ключ настройки */
   key: string;
-  /**
-     * Значение настройки (секретные значения маскируются)
-     * @nullable
-     */
-  value?: SettingResponseDtoValue;
+  /** Значение настройки */
+  value: string;
+  /** Доступна без авторизации */
+  publish: boolean;
   /**
      * Дата последнего изменения
      * @nullable

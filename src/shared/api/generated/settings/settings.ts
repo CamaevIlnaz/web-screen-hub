@@ -22,6 +22,7 @@ export const getSettingsControllerFindAllUrl = () => {
 }
 
 /**
+ * Без авторизации возвращаются только настройки с publish=true. С авторизацией — все настройки из базы.
  * @summary Список настроек
  */
 export const settingsControllerFindAll = async ( options?: Parameters<typeof customFetch>[1]): Promise<SettingResponseDto[]> => {
@@ -73,7 +74,7 @@ return customFetch<SettingResponseDto>(getSettingsControllerCreateUrl(),
 );}
 
 
-export const getSettingsControllerUpdateUrl = (key: 'figma.token',) => {
+export const getSettingsControllerUpdateUrl = (key: string,) => {
 
 
 
@@ -82,9 +83,9 @@ export const getSettingsControllerUpdateUrl = (key: 'figma.token',) => {
 }
 
 /**
- * @summary Изменить значение настройки
+ * @summary Изменить настройку
  */
-export const settingsControllerUpdate = async (key: 'figma.token',
+export const settingsControllerUpdate = async (key: string,
     updateSettingDto: UpdateSettingDto, options?: Parameters<typeof customFetch>[1]): Promise<SettingResponseDto> => {
 
     const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
@@ -111,7 +112,7 @@ return customFetch<SettingResponseDto>(getSettingsControllerUpdateUrl(key),
 );}
 
 
-export const getSettingsControllerRemoveUrl = (key: 'figma.token',) => {
+export const getSettingsControllerRemoveUrl = (key: string,) => {
 
 
 
@@ -122,7 +123,7 @@ export const getSettingsControllerRemoveUrl = (key: 'figma.token',) => {
 /**
  * @summary Удалить настройку
  */
-export const settingsControllerRemove = async (key: 'figma.token', options?: Parameters<typeof customFetch>[1]): Promise<void> => {
+export const settingsControllerRemove = async (key: string, options?: Parameters<typeof customFetch>[1]): Promise<void> => {
 
   return customFetch<void>(getSettingsControllerRemoveUrl(key),
   {

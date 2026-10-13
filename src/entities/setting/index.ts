@@ -1,13 +1,8 @@
 export { settingModel } from './model';
 export type {
+  CreateSettingDto,
   SettingResponseDto,
-  UpdatableSettingKey,
   UpdateSettingDto,
   UpdateSettingParams,
 } from './model';
-export {
-  asSettingValue,
-  getSettingMeta,
-  isUpdatableSettingKey,
-  type SettingMeta,
-} from './lib';
+export { asSettingValue } from './lib';

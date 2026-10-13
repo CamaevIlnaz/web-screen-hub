@@ -1,9 +1,12 @@
-import { findAllFx, updateFx } from './effects';
+import { createFx, findAllFx, removeFx, updateFx } from './effects';
 import {
+  $isCreating,
   $isLoading,
-  $isUpdating,
+  $removingKey,
   $settings,
   $updatingKey,
+  settingCreateSubmitted,
+  settingRemoveRequested,
   settingsRequested,
   settingUpdateSubmitted,
 } from './stores';
@@ -11,17 +14,22 @@ import {
 export const settingModel = {
   $settings,
   $isLoading,
-  $isUpdating,
+  $isCreating,
   $updatingKey,
+  $removingKey,
   settingsRequested,
+  settingCreateSubmitted,
   settingUpdateSubmitted,
+  settingRemoveRequested,
   findAllFx,
+  createFx,
   updateFx,
+  removeFx,
 };
 
 export type {
+  CreateSettingDto,
   SettingResponseDto,
-  UpdatableSettingKey,
   UpdateSettingDto,
   UpdateSettingParams,
 } from './types';

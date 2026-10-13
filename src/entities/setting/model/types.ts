@@ -1,14 +1,12 @@
 import type {
+  CreateSettingDto,
   SettingResponseDto,
   UpdateSettingDto,
 } from '@/shared/api/generated/model';
 
-export type { SettingResponseDto, UpdateSettingDto };
-
-/** Ключи, которые можно изменять через PATCH /api/settings/{key} */
-export type UpdatableSettingKey = 'figma.token';
+export type { CreateSettingDto, SettingResponseDto, UpdateSettingDto };
 
 export type UpdateSettingParams = {
-  key: UpdatableSettingKey;
+  key: string;
   dto: UpdateSettingDto;
 };

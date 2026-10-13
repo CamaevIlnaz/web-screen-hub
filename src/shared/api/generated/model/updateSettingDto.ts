@@ -8,5 +8,7 @@
 
 export interface UpdateSettingDto {
   /** Новое значение настройки */
-  value: string;
+  value?: string;
+  /** Доступна без авторизации */
+  publish?: boolean;
 }
