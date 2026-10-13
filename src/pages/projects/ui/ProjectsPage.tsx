@@ -1,11 +1,24 @@
-import { Box, Heading, Stack, Separator } from '@chakra-ui/react';
-import { FolderClosed } from 'lucide-react';
+import { Box, Heading, Stack, Separator, Text } from '@chakra-ui/react';
+import { useUnit } from 'effector-react';
 
+import {
+  asNullableString,
+  getProjectPreviewUrl,
+  projectModel,
+} from '@/entities/project';
+import { formatCardDate } from '@/shared/lib';
 import { Card } from '@/shared/ui';
 import { BaseLayout } from '@/widgets/base-layout';
 import { Header } from '@/widgets/header';
 
+import { projectOpened } from '../model';
+
 export const ProjectsPage = () => {
+  const [projects, onProjectOpen] = useUnit([
+    projectModel.$projects,
+    projectOpened,
+  ]);
+
   return (
     <BaseLayout>
       <Stack gap={10}>
@@ -17,14 +30,27 @@ export const ProjectsPage = () => {
           </Heading>
         </Stack>
 
-        <Stack gap="6" direction="row" flexWrap="wrap">
-          <Card
-            image="https://placehold.co/640x360/0b5a8c/ffffff"
-            title="Розничный банкинг"
-            description="Вклады и накопительные счета"
-            date="12:10 25.03.2026"
-          />
-        </Stack>
+        {projects.length === 0 ? (
+          <Text color="whiteAlpha.700">Проекты не найдены</Text>
+        ) : (
+          <Box display="flex" gap="4" flexWrap="wrap">
+            {projects.map((project) => {
+              const previewUrl = getProjectPreviewUrl(project.preview);
+              const description = asNullableString(project.description);
+
+              return (
+                <Card
+                  key={project.id}
+                  image={previewUrl ?? undefined}
+                  title={project.name}
+                  description={description ?? undefined}
+                  date={formatCardDate(project.lastModified)}
+                  onClick={() => onProjectOpen(project.id)}
+                />
+              );
+            })}
+          </Box>
+        )}
       </Stack>
     </BaseLayout>
   );

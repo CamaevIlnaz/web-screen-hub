@@ -1,4 +1,5 @@
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Clock, LayoutGrid } from 'lucide-react';
 
 interface CardProps {
   image?: string;
@@ -34,7 +35,7 @@ export function Card({ image, title, description, date, onClick }: CardProps) {
       _hover={{ opacity: 0.92 }}
     >
       {image ? (
-        <Box position="relative" w="100%" overflow="hidden">
+        <Box position="relative" p={2} pb={0} w="100%" overflow="hidden">
           <Image
             src={image}
             alt={title}
@@ -42,6 +43,7 @@ export function Card({ image, title, description, date, onClick }: CardProps) {
             h="180px"
             objectFit="cover"
             display="block"
+            borderRadius={6}
           />
         </Box>
       ) : null}
@@ -49,8 +51,8 @@ export function Card({ image, title, description, date, onClick }: CardProps) {
       <Box w="100%" px="4" py="4">
         <Text
           color="whiteAlpha.900"
-          fontSize="md"
-          fontWeight="semibold"
+          fontSize="xl"
+          fontWeight="bold"
           lineHeight="1.3"
           mb="2"
         >
@@ -61,9 +63,10 @@ export function Card({ image, title, description, date, onClick }: CardProps) {
             {description}
           </Text>
         ) : null}
-        <Text fontSize="sm" color="rgb(136, 136, 136)">
-          {date}
-        </Text>
+        <Flex align="center" gap="1.5" color="rgb(136, 136, 136)">
+          <Clock size={14} />
+          <Text fontSize="sm">{date}</Text>
+        </Flex>
       </Box>
     </Box>
   );

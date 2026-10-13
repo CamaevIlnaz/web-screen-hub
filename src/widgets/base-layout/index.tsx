@@ -13,7 +13,7 @@ export const BaseLayout = ({ children }: LayoutProps) => {
       p="7"
       css={{
         backgroundColor: "#0a0a0a",
-        backgroundImage: 'radial-gradient(#ffffff1a 1px, transparent 1px)',
+        backgroundImage: 'radial-gradient(#ffffff12 1px, transparent 1px)',
         backgroundSize: '20px 20px',
       }}
     >
