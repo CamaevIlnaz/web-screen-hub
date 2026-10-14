@@ -4,7 +4,7 @@ import { Lock } from 'lucide-react';
 import { LogoLink } from '@/widgets/logo-link';
 
 interface HeaderProps {
-  title: string;
+  title: React.ReactNode;
   updatedAt?: string;
   approvedAt?: string;
   figmaUrl?: string;
