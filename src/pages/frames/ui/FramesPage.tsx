@@ -1,4 +1,7 @@
 import type { ReactNode } from 'react';
+import {Header} from "@/widgets/header";
+import {Stack} from "@chakra-ui/react";
+import {BaseLayout} from "@/widgets/base-layout";
 
 interface FramesPageProps {
   children?: ReactNode;
@@ -10,8 +13,12 @@ export const FramesPage = ({ children }: FramesPageProps) => {
   }
 
   return (
-    <div>
-      <h1>Группы</h1>
-    </div>
+    <BaseLayout>
+      <Stack gap={10}>
+        <Header
+          title="Раздел | Группы"
+        />
+      </Stack>
+    </BaseLayout>
   );
 };

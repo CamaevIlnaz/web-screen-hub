@@ -26,6 +26,7 @@ function CreateSectionForm() {
       name: values.name.trim(),
       description: values.description?.trim() || undefined,
       figmaId: values.figmaId?.trim() || undefined,
+      figmaLink: values.figmaLink?.trim() || undefined,
     });
   });
 
@@ -58,6 +59,11 @@ function CreateSectionForm() {
                 name="figmaId"
                 label="Figma ID"
                 placeholder="123:456"
+              />
+              <FormInput
+                name="figmaLink"
+                label="Ссылка на Figma"
+                placeholder="https://www.figma.com/design/..."
               />
             </Box>
           </Box>

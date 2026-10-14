@@ -32,6 +32,7 @@ interface ProjectsTableColumn {
 const PROJECTS_TABLE_COLUMNS: ProjectsTableColumn[] = [
   { id: 'name', label: 'Название' },
   { id: 'figmaId', label: 'Figma ID', w: '160px' },
+  { id: 'figmaLink', label: 'Ссылка на Figma', w: '220px' },
   { id: 'lastModified', label: 'Последнее обновление', w: '220px' },
   { id: 'actions', label: 'Действия', w: '140px', textAlign: 'right' },
 ];
@@ -139,6 +140,7 @@ export function ProjectsTable({
             {projects.map((project) => {
               const description = asNullableString(project.description);
               const figmaId = asNullableString(project.figmaId);
+              const figmaLink = asNullableString(project.figmaLink);
               const previewUrl = getProjectPreviewUrl(project.preview);
 
               return (
@@ -199,6 +201,30 @@ export function ProjectsTable({
                     <Text fontSize="sm" color="text" lineHeight="1.3">
                       {figmaId ?? '—'}
                     </Text>
+                  </Table.Cell>
+                  <Table.Cell px="5" py="4">
+                    {figmaLink ? (
+                      <Text
+                        as="a"
+                        href={figmaLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        fontSize="sm"
+                        color="primary"
+                        lineHeight="1.3"
+                        truncate
+                        display="block"
+                        maxW="200px"
+                        onClick={(event) => event.stopPropagation()}
+                        _hover={{ textDecoration: 'underline' }}
+                      >
+                        {figmaLink}
+                      </Text>
+                    ) : (
+                      <Text fontSize="sm" color="text" lineHeight="1.3">
+                        —
+                      </Text>
+                    )}
                   </Table.Cell>
                   <Table.Cell px="5" py="4">
                     <Text

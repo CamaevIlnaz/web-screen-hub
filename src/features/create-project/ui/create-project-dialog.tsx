@@ -34,6 +34,7 @@ function CreateProjectForm() {
       name: values.name.trim(),
       description: values.description?.trim() || undefined,
       figmaId: values.figmaId?.trim() || undefined,
+      figmaLink: values.figmaLink?.trim() || undefined,
       preview: previewFile ?? undefined,
     });
   });
@@ -67,6 +68,11 @@ function CreateProjectForm() {
                 name="figmaId"
                 label="Figma ID"
                 placeholder="1234567890"
+              />
+              <FormInput
+                name="figmaLink"
+                label="Ссылка на Figma"
+                placeholder="https://www.figma.com/file/..."
               />
               <FormFileUpload label="Превью" onFileChange={setPreviewFile} />
             </Box>

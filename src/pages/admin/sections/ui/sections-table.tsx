@@ -29,6 +29,7 @@ interface SectionsTableColumn {
 const SECTIONS_TABLE_COLUMNS: SectionsTableColumn[] = [
   { id: 'name', label: 'Название' },
   { id: 'figmaId', label: 'Figma ID', w: '160px' },
+  { id: 'figmaLink', label: 'Ссылка на Figma', w: '220px' },
   { id: 'lastModified', label: 'Последнее обновление', w: '220px' },
   { id: 'actions', label: 'Действия', w: '140px', textAlign: 'right' },
 ];
@@ -139,6 +140,7 @@ export function SectionsTable({
             {sections.map((section) => {
               const description = asNullableString(section.description);
               const figmaId = asNullableString(section.figmaId);
+              const figmaLink = asNullableString(section.figmaLink);
 
               return (
                 <Table.Row
@@ -181,6 +183,30 @@ export function SectionsTable({
                     <Text fontSize="sm" color="text" lineHeight="1.3">
                       {figmaId ?? '—'}
                     </Text>
+                  </Table.Cell>
+                  <Table.Cell px="5" py="4">
+                    {figmaLink ? (
+                      <Text
+                        as="a"
+                        href={figmaLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        fontSize="sm"
+                        color="primary"
+                        lineHeight="1.3"
+                        truncate
+                        display="block"
+                        maxW="200px"
+                        onClick={(event) => event.stopPropagation()}
+                        _hover={{ textDecoration: 'underline' }}
+                      >
+                        {figmaLink}
+                      </Text>
+                    ) : (
+                      <Text fontSize="sm" color="text" lineHeight="1.3">
+                        —
+                      </Text>
+                    )}
                   </Table.Cell>
                   <Table.Cell px="5" py="4">
                     <Text
